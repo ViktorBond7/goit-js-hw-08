@@ -105,7 +105,7 @@ container.addEventListener('click', event => {
       }
     );
     myModal.show();
-    // console.log(myModal);
+    console.log(myModal);
     function onKey(params) {
       if (params.code === 'Escape') {
         myModal.close();
