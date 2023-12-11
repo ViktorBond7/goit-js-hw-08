@@ -27,10 +27,10 @@ ul {
   width: calc((100% - 48px) / 3);
 }
 
-/* .modal {
+.modal {
   width: 1112px;
   height: 640px;
-} */
+}
 
 .modal-img {
   position: absolute;

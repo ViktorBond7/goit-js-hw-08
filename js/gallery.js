@@ -90,9 +90,9 @@ container.addEventListener('click', event => {
     if (!product) return;
 
     const myModal = basicLightbox.create(
-      `
+      `<div class="modal">
 		<img class="modal-img" width="1112" height="640" src="${productImg}">
-	`,
+    </div>`,
 
       {
         onShow: () => {
