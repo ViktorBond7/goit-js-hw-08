@@ -88,11 +88,10 @@ container.addEventListener('click', event => {
   if (productImg) {
     const product = images.find(image => image.original === productImg);
     if (!product) return;
-    // console.log(product);
 
     const myModal = basicLightbox.create(
       `<div class="modal">
-		<img class="modal-img"  width="1112" height="640" src="${productImg}">
+		<img class="modal-img" width="1112" height="640" src="${productImg}">
 	</div>`,
 
       {
@@ -105,12 +104,12 @@ container.addEventListener('click', event => {
       }
     );
     myModal.show();
-    // console.log(myModal);
+
     function onKey(params) {
       if (params.code === 'Escape') {
         myModal.close();
-        document.removeEventListener('onkeydown', onKey);
       }
     }
   }
 });
+// (<div class="modal"></div>;)
