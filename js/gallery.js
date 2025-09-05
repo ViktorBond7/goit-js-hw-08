@@ -1,4 +1,3 @@
-`use strict`;
 const images = [
   {
     preview:
@@ -65,51 +64,40 @@ const images = [
   },
 ];
 
-const container = document.querySelector('.gallery');
-container.innerHTML = images.reduce(
-  (html, image) =>
-    html +
-    `<li class="gallery-item">
+const galleryRef = document.querySelector('.gallery');
+
+const galleryCard = image => {
+  return `<li class="gallery-item">
   <a class="gallery-link" href="${image.original}">
     <img
       class="gallery-image"
       src="${image.preview}"
       data-source="${image.original}"
-      alt="${image.description}"  width="360" height="200"
+      alt="${image.description}"
     />
   </a>
-</li>`,
-  ''
+</li>
+`;
+};
+
+const galleryCards = images => images.map(image => galleryCard(image)).join('');
+
+galleryRef.innerHTML = galleryCards(images);
+
+const instance = basicLightbox.create(
+  `
+  <h1>Not closable</h1>
+  <p>It's not possible to close this lightbox with a click.</p>
+`,
+  {
+    closable: false,
+  }
 );
 
-container.addEventListener('click', event => {
+galleryRef.addEventListener('click', event => {
   event.preventDefault();
-  const productImg = event.target.dataset.source;
-  if (productImg) {
-    const product = images.find(image => image.original === productImg);
-    if (!product) return;
-
-    const myModal = basicLightbox.create(
-      `<div class="modal">
-		<img class="modal-img" width="1112" height="640" src="${productImg}">
-    </div>`,
-
-      {
-        onShow: () => {
-          document.addEventListener('keydown', onKey);
-        },
-        onClose: () => {
-          document.removeEventListener('keydown', onKey);
-        },
-      }
-    );
-    myModal.show();
-
-    function onKey(params) {
-      if (params.code === 'Escape') {
-        myModal.close();
-      }
-    }
+  const imgSrcOrig = event.target.dataset.source;
+  if (imgSrcOrig) {
+    instance.show();
   }
 });
-// (<div class="modal"></div>;)
