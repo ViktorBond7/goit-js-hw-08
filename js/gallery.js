@@ -86,6 +86,8 @@ galleryRef.innerHTML = galleryCards(images);
 
 const clickImg = event => {
   event.preventDefault();
+  const length = images.length;
+
   let indexImg;
   let instance;
 
@@ -116,14 +118,18 @@ const clickImg = event => {
       instance.close();
     }
     if (even.code === 'ArrowRight') {
-      indexImg += 1;
-      instance.close();
-      showImage(indexImg);
+      if (indexImg < length - 1) {
+        indexImg += 1;
+        instance.close();
+        showImage(indexImg);
+      }
     }
     if (even.code === 'ArrowLeft') {
-      indexImg -= 1;
-      instance.close();
-      showImage(indexImg);
+      if (indexImg >= 1) {
+        indexImg -= 1;
+        instance.close();
+        showImage(indexImg);
+      }
     }
   };
 
