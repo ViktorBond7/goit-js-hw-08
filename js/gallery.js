@@ -99,7 +99,9 @@ const clickImg = event => {
 
   const showImage = index => {
     instance = basicLightbox.create(
-      `<img class="bigImg" src="${images[index].original}" width="1112" height="640"/> `,
+      `<div class="modal">
+      <img src="${images[index].original}" width="1112" height="640"/>
+      </div>`,
       {
         onShow: () => document.addEventListener('keydown', onEscAndArrow),
         onClose: () => document.removeEventListener('keydown', onEscAndArrow),
