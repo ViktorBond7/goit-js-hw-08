@@ -84,20 +84,46 @@ const galleryCards = images => images.map(image => galleryCard(image)).join('');
 
 galleryRef.innerHTML = galleryCards(images);
 
-const instance = basicLightbox.create(
-  `
-  <h1>Not closable</h1>
-  <p>It's not possible to close this lightbox with a click.</p>
-`,
-  {
-    closable: false,
-  }
-);
-
-galleryRef.addEventListener('click', event => {
+const clickImg = event => {
   event.preventDefault();
+  let indexImg;
+  let instance;
+
   const imgSrcOrig = event.target.dataset.source;
-  if (imgSrcOrig) {
+
+  indexImg = images.findIndex(image => image.original === imgSrcOrig);
+
+  if (!imgSrcOrig) return;
+
+  const showImage = index => {
+    instance = basicLightbox.create(
+      `<img class="bigImg" src="${images[index].original}" width="1112" height="640"/> `,
+      {
+        onShow: () => document.addEventListener('keydown', onEscAndArrow),
+        onClose: () => document.removeEventListener('keydown', onEscAndArrow),
+      }
+    );
+
     instance.show();
-  }
-});
+  };
+
+  const onEscAndArrow = even => {
+    if (even.code === 'Escape') {
+      instance.close();
+    }
+    if (even.code === 'ArrowRight') {
+      indexImg += 1;
+      instance.close();
+      showImage(indexImg);
+    }
+    if (even.code === 'ArrowLeft') {
+      indexImg -= 1;
+      instance.close();
+      showImage(indexImg);
+    }
+  };
+
+  showImage(indexImg);
+};
+
+galleryRef.addEventListener('click', clickImg);
