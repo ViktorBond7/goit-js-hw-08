@@ -89,6 +89,8 @@ const clickImg = event => {
   let indexImg;
   let instance;
 
+  if (event.target.nodeName !== 'IMG') return;
+
   const imgSrcOrig = event.target.dataset.source;
 
   indexImg = images.findIndex(image => image.original === imgSrcOrig);
