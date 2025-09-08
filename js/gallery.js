@@ -117,19 +117,15 @@ const clickImg = event => {
     if (even.code === 'Escape') {
       instance.close();
     }
-    if (even.code === 'ArrowRight') {
-      if (indexImg < length - 1) {
-        indexImg += 1;
-        instance.close();
-        showImage(indexImg);
-      }
+    if (even.code === 'ArrowRight' && indexImg < length - 1) {
+      indexImg += 1;
+      instance.close();
+      showImage(indexImg);
     }
-    if (even.code === 'ArrowLeft') {
-      if (indexImg >= 1) {
-        indexImg -= 1;
-        instance.close();
-        showImage(indexImg);
-      }
+    if (even.code === 'ArrowLeft' && indexImg >= 1) {
+      indexImg -= 1;
+      instance.close();
+      showImage(indexImg);
     }
   };
 
